@@ -1,0 +1,29 @@
+{
+  "name": "huanjian-music-rpk-source",
+  "version": "0.0.0",
+  "private": true,
+  "description": "环间音乐三型号 RPK 开源前端，采用 GPL-3.0-only。",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "10/rpk",
+    "10p/rpk",
+    "9p/rpk"
+  ],
+  "scripts": {
+    "check": "node scripts/check-source.mjs",
+    "test": "node --test tests/rpk/test_*.mjs",
+    "build": "node scripts/build-rpk.mjs",
+    "build:10": "node scripts/build-rpk.mjs 10",
+    "build:10p": "node scripts/build-rpk.mjs 10p",
+    "build:9p": "node scripts/build-rpk.mjs 9p",
+    "assets": "python3 scripts/generate-assets.py",
+    "format": "prettier --write \"{10,10p,9p}/rpk/**/*.{js,ux,json}\" \"scripts/*.mjs\" \"tests/rpk/*.mjs\" \"*.{json,md}\" \"docs/*.md\"",
+    "format:check": "prettier --check \"{10,10p,9p}/rpk/**/*.{js,ux,json}\" \"scripts/*.mjs\" \"tests/rpk/*.mjs\" \"*.{json,md}\" \"docs/*.md\""
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}

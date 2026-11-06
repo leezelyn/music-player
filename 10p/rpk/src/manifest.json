@@ -1,0 +1,35 @@
+{
+  "package": "com.tse.musicplayer",
+  "name": "环间音乐",
+  "versionName": "0.2.41",
+  "versionCode": 65,
+  "minPlatformVersion": 1000,
+  "icon": "/common/logo.png",
+  "deviceTypeList": ["watch"],
+  "features": [
+    {
+      "name": "system.file"
+    },
+    {
+      "name": "system.app"
+    },
+    {
+      "name": "system.interconnect"
+    },
+    {
+      "name": "system.brightness"
+    }
+  ],
+  "config": {
+    "logLevel": "log",
+    "designWidth": 336
+  },
+  "router": {
+    "entry": "pages/index",
+    "pages": {
+      "pages/index": {
+        "component": "player"
+      }
+    }
+  }
+}

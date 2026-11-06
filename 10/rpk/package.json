@@ -1,0 +1,14 @@
+{
+  "name": "@huanjian/rpk-10",
+  "version": "0.2.43",
+  "private": true,
+  "scripts": {
+    "build": "aiot build --enable-jsc",
+    "release": "aiot release"
+  },
+  "devDependencies": {
+    "aiot-toolkit": "2.0.5",
+    "@aiot-toolkit/jsc": "1.0.9"
+  },
+  "license": "GPL-3.0-only"
+}

@@ -1,0 +1,53 @@
+{
+  "source": "package-lock.json and installed direct-package metadata",
+  "counts_by_installed_location": {
+    "ISC": 471,
+    "BSD-3-Clause": 105,
+    "MIT": 3907,
+    "Apache-2.0": 96,
+    "CC-BY-4.0": 12,
+    "BSD-2-Clause": 60,
+    "CC0-1.0": 3,
+    "(MIT OR CC0-1.0)": 45,
+    "Python-2.0": 3,
+    "(BSD-3-Clause AND Apache-2.0)": 3,
+    "BlueOak-1.0.0": 30,
+    "0BSD": 9,
+    "(MIT OR GPL-3.0-or-later)": 3,
+    "(MIT AND Zlib)": 3,
+    "(WTFPL OR MIT)": 3,
+    "MISSING": 3
+  },
+  "missing_license_metadata_unique": [
+    {
+      "package": "only",
+      "version": "0.0.2"
+    }
+  ],
+  "direct_packages": [
+    {
+      "package": "aiot-toolkit",
+      "version": "2.0.5",
+      "declared_license": "ISC",
+      "original_notice_files": []
+    },
+    {
+      "package": "@aiot-toolkit/jsc",
+      "version": "1.0.9",
+      "declared_license": "ISC",
+      "original_notice_files": []
+    },
+    {
+      "package": "prettier",
+      "version": "3.6.2",
+      "declared_license": "MIT",
+      "purpose": "development formatting only",
+      "original_notice_files": [
+        {
+          "path": "licenses/prettier-LICENSE",
+          "sha256": "b0f2417199889f1c0d28ec4e0244eacf1a15de5819d61f641dd7d8f45153ac9c"
+        }
+      ]
+    }
+  ]
+}

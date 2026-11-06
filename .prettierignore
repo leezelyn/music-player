@@ -1,0 +1,10 @@
+**/node_modules
+**/build
+**/dist
+package-lock.json
+LICENSE
+NOTICE
+**/common/LICENSE.txt
+.local-review
+docs/generated-assets.json
+licenses/dependency-licenses.json

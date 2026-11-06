@@ -1,0 +1,15 @@
+{
+  "name": "@huanjian/rpk-9p",
+  "version": "0.2.41",
+  "private": true,
+  "scripts": {
+    "build": "aiot build --enable-jsc",
+    "release": "aiot release",
+    "build:js": "aiot build"
+  },
+  "devDependencies": {
+    "aiot-toolkit": "2.0.5",
+    "@aiot-toolkit/jsc": "1.0.9"
+  },
+  "license": "GPL-3.0-only"
+}

@@ -1,0 +1,1032 @@
+<template>
+  <stack class="player-root">
+    <div class="page">
+      <div class="top-cap">
+        <text class="top-label">{{ uiHeader }}</text>
+      </div>
+      <div class="scroll-shell">
+        <scroll
+          id="content-scroll"
+          class="content-scroll"
+          scroll-y="true"
+          @scroll="onContentScroll"
+          @scrolltop="onContentTop"
+          @scrollbottom="onContentBottom"
+        >
+          <div class="scroll-content">
+            <div
+              class="section"
+              if="{{uiScreen === 'home'}}"
+            >
+              <div
+                class="title-shell"
+                @click="uiDisc"
+              >
+                <text
+                  class="track-title"
+                  if="{{uiTitleUnavailable}}"
+                >
+                  {{ uiTrackTitle }}
+                </text>
+                <marquee
+                  id="song-marquee"
+                  class="title-marquee"
+                  if="{{!uiTitleUnavailable}}"
+                  direction="left"
+                  scrollamount="{{6}}"
+                  loop="{{-1}}"
+                  text-offset="{{50}}"
+                >
+                  {{ uiTrackTitle }}
+                </marquee>
+              </div>
+              <div
+                class="plain-link"
+                @click="uiLyrics"
+              >
+                <marquee
+                  id="lyric-marquee"
+                  class="lyric-marquee"
+                  if="{{!uiLyricUnavailable}}"
+                  direction="left"
+                  scrollamount="{{3}}"
+                  loop="{{-1}}"
+                  text-offset="{{30}}"
+                >
+                  {{ uiLyricLine }}
+                </marquee>
+                <text
+                  class="hint"
+                  if="{{uiLyricUnavailable}}"
+                >
+                  {{ uiLyricLine }}
+                </text>
+              </div>
+              <div class="progress-rail">
+                <div
+                  class="progress-fill"
+                  style="{{progressStyle}}"
+                ></div>
+              </div>
+              <text class="hint">{{ elapsedText }} / {{ durationText }}</text>
+              <div
+                class="action main-action home-action primary"
+                @click="uiPrimary"
+              >
+                <image
+                  class="action-icon"
+                  src="{{uiPrimaryIcon}}"
+                ></image>
+                <text class="action-label home-action-label primary-label">
+                  {{ uiPrimaryLabel }}
+                </text>
+              </div>
+              <div
+                class="action main-action home-action"
+                style="{{uiSkipStyle}}"
+                @click="previous"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/previous-user.png"
+                ></image>
+                <text class="action-label home-action-label">上一首</text>
+              </div>
+              <div
+                class="action main-action home-action"
+                style="{{uiSkipStyle}}"
+                @click="next"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/next.png"
+                ></image>
+                <text class="action-label home-action-label">下一首</text>
+              </div>
+              <text class="hint">{{ playOrderText }}</text>
+              <div
+                class="plain-link"
+                @click="uiStatusDetails"
+              >
+                <text
+                  class="hint"
+                  style="{{uiStatusStyle}}"
+                >
+                  {{ uiStatus }}
+                </text>
+              </div>
+              <div
+                class="action home-action"
+                @click="openSongs"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/library.png"
+                ></image>
+                <text class="action-label home-action-label">歌曲</text>
+              </div>
+              <div
+                class="action home-action"
+                @click="uiTransfer"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/phone.png"
+                ></image>
+                <text class="action-label home-action-label">传歌</text>
+              </div>
+              <div
+                class="action home-action"
+                @click="uiSettings"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/settings.png"
+                ></image>
+                <text class="action-label home-action-label">设置</text>
+              </div>
+            </div>
+
+            <div
+              class="section"
+              if="{{uiScreen === 'disc'}}"
+            >
+              <div
+                class="action"
+                @click="uiHome"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/minimize.png"
+                ></image>
+                <text class="action-label">返回播放</text>
+              </div>
+              <div
+                class="title-shell"
+                @click="uiSongDetails"
+              >
+                <text
+                  class="track-title"
+                  if="{{uiTitleUnavailable}}"
+                >
+                  {{ uiTrackTitle }}
+                </text>
+                <marquee
+                  id="disc-song-marquee"
+                  class="title-marquee"
+                  if="{{!uiTitleUnavailable}}"
+                  direction="left"
+                  scrollamount="{{6}}"
+                  loop="{{-1}}"
+                  text-offset="{{50}}"
+                >
+                  {{ uiTrackTitle }}
+                </marquee>
+              </div>
+              <div
+                class="record-stage"
+                @click="uiPrimary"
+              >
+                <stack class="record">
+                  <div class="record-base"></div>
+                  <image
+                    class="record-cover"
+                    if="{{uiDiscCoverUri}}"
+                    style="{{uiDiscStyle}}"
+                    src="{{uiDiscCoverUri}}"
+                  ></image>
+                  <div
+                    class="record-cover-mask"
+                    if="{{uiDiscCoverUri}}"
+                  ></div>
+                  <div
+                    class="record-label"
+                    if="{{!uiDiscCoverUri}}"
+                  ></div>
+                  <div
+                    class="record-mark"
+                    if="{{!uiDiscCoverUri}}"
+                    style="{{uiDiscMarkStyle}}"
+                  ></div>
+                  <div class="record-rim"></div>
+                  <div class="record-groove"></div>
+                  <div class="record-inner"></div>
+                  <div class="record-hole"></div>
+                </stack>
+              </div>
+              <div
+                class="plain-link"
+                @click="uiLyrics"
+              >
+                <text class="hint">{{ uiDiscPrevious }}</text>
+                <text class="body-text">{{ uiDiscCurrent }}</text>
+                <text class="hint">{{ uiDiscNext }}</text>
+              </div>
+              <text class="hint">{{ elapsedText }} / {{ durationText }}</text>
+              <div
+                class="action primary"
+                @click="uiPrimary"
+              >
+                <image
+                  class="action-icon"
+                  src="{{uiPrimaryIcon}}"
+                ></image>
+                <text class="action-label primary-label">{{ uiPrimaryLabel }}</text>
+              </div>
+            </div>
+
+            <div
+              class="section"
+              if="{{uiScreen !== 'home' && uiScreen !== 'disc'}}"
+            >
+              <div
+                class="action"
+                @click="uiBack"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/back.png"
+                ></image>
+                <text class="action-label">返回</text>
+              </div>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'library'}}"
+            >
+              <text class="hint">手机歌曲 {{ phoneSongCount }} 首</text>
+              <div
+                class="song-card"
+                for="{{songs}}"
+                tid="id"
+                style="{{$item.cardStyle}}"
+              >
+                <marquee
+                  id="{{'library-title-' + $item.index}}"
+                  class="song-card-title"
+                  direction="left"
+                  scrollamount="{{6}}"
+                  loop="{{-1}}"
+                  text-offset="{{50}}"
+                  @click="chooseSong($item.index)"
+                >
+                  {{ $item.displayTitle }}
+                </marquee>
+                <div
+                  class="song-plain-link"
+                  @click="chooseSong($item.index)"
+                >
+                  <text class="song-hint">{{ $item.caption }}</text>
+                </div>
+                <image
+                  class="song-selected-icon"
+                  if="{{$item.selected}}"
+                  src="/common/icons/check.png"
+                ></image>
+                <div
+                  class="song-action danger"
+                  if="{{$item.deletable}}"
+                  @click="requestDeleteSong($item.id)"
+                >
+                  <image
+                    class="action-icon"
+                    src="/common/icons/song-delete-system.png"
+                  ></image>
+                  <text class="song-action-label">删除歌曲</text>
+                </div>
+              </div>
+              <div
+                class="section"
+                if="{{libraryPageCount > 1}}"
+              >
+                <text class="hint">第 {{ libraryPageText }} 页</text>
+                <div
+                  class="action"
+                  if="{{libraryPage > 0}}"
+                  @click="previousLibraryPage"
+                >
+                  <text class="action-label">上一页</text>
+                </div>
+                <div
+                  class="action"
+                  if="{{libraryPage + 1 < libraryPageCount}}"
+                  @click="nextLibraryPage"
+                >
+                  <text class="action-label">下一页</text>
+                </div>
+              </div>
+              <div
+                class="action"
+                @click="uiTransfer"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/phone.png"
+                ></image>
+                <text class="action-label">从手机传入歌曲</text>
+              </div>
+              <text
+                class="body-text"
+                if="{{!hasSelectedSong}}"
+              >
+                暂无歌曲，可从手机传入。
+              </text>
+              <text class="body-text">{{ statusText }}</text>
+              <div
+                class="action"
+                if="{{playing || paused}}"
+                @click="stop"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/stop.png"
+                ></image>
+                <text class="action-label">停止播放</text>
+              </div>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'transfer'}}"
+            >
+              <image
+                class="transfer-hero-icon"
+                src="{{uiTransferIcon}}"
+              ></image>
+              <text class="page-title">{{ uiTransferTitle }}</text>
+              <text class="hint">{{ uiTransferProgress }}</text>
+              <div
+                class="action"
+                if="{{receiving}}"
+                @click="cancelTransfer"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/warning.png"
+                ></image>
+                <text class="action-label">中断传输</text>
+              </div>
+              <div
+                class="action primary"
+                if="{{hasPhoneSong && !receiving}}"
+                @click="choosePhone"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/success.png"
+                ></image>
+                <text class="action-label primary-label">选择这首歌曲</text>
+              </div>
+              <div
+                class="action"
+                if="{{playing || paused}}"
+                @click="stop"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/stop.png"
+                ></image>
+                <text class="action-label">先停止播放</text>
+              </div>
+              <text
+                class="body-text"
+                if="{{receiving || !phoneReceiptText || uiTransferFailed}}"
+              >
+                {{ phoneText }}
+              </text>
+              <text
+                class="body-text"
+                if="{{phoneReceiptText && !receiving}}"
+              >
+                {{ phoneReceiptText }}
+              </text>
+              <div
+                class="action"
+                @click="openSongs"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/library.png"
+                ></image>
+                <text class="action-label">打开歌曲清单</text>
+              </div>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'settings'}}"
+            >
+              <div
+                class="action"
+                @click="uiPlaybackSettings"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/playback-settings.png"
+                ></image>
+                <text class="action-label">播放设置</text>
+              </div>
+              <div
+                class="action"
+                @click="uiReadState"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/info.png"
+                ></image>
+                <text class="action-label">播放状态</text>
+              </div>
+              <div
+                class="action"
+                @click="uiConnectionDetails"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/connection.png"
+                ></image>
+                <text class="action-label">连接信息</text>
+              </div>
+              <div
+                class="action"
+                @click="uiHelp"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/help.png"
+                ></image>
+                <text class="action-label">使用说明</text>
+              </div>
+
+              <text class="hint">环间音乐 · {{ appVersion }}</text>
+              <text
+                @click="uiLicense"
+                class="hint"
+              >
+                {{ copyrightText }} GPL-3.0-only · 无担保 · 点击查看许可
+              </text>
+              <div
+                class="action"
+                @click="exitApp"
+              >
+                <text class="action-label">退出播放器</text>
+              </div>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'playback'}}"
+            >
+              <div
+                class="action"
+                @click="uiToggleAwake"
+              >
+                <text class="action-label">屏幕常亮</text>
+              </div>
+              <text class="hint">{{ uiAwakeText }}</text>
+              <text class="hint">音量 {{ volumeText }}</text>
+              <div
+                class="action"
+                style="{{uiVolumeStyle}}"
+                @click="volumeDown"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/minus.png"
+                ></image>
+                <text class="action-label">降低音量</text>
+              </div>
+              <div
+                class="action"
+                style="{{uiVolumeStyle}}"
+                @click="volumeUp"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/plus.png"
+                ></image>
+                <text class="action-label">提高音量</text>
+              </div>
+              <div
+                class="action"
+                if="{{playing || paused || switching}}"
+                @click="stop"
+              >
+                <image
+                  class="action-icon"
+                  src="/common/icons/stop.png"
+                ></image>
+                <text class="action-label">停止播放</text>
+              </div>
+              <text class="hint">播放顺序 · {{ playOrderText }}</text>
+              <div
+                class="action"
+                @click="setPlayOrder('sequential')"
+              >
+                <text class="action-label">顺序播放</text>
+              </div>
+              <div
+                class="action"
+                @click="setPlayOrder('list')"
+              >
+                <text class="action-label">列表循环</text>
+              </div>
+              <div
+                class="action"
+                @click="setPlayOrder('single')"
+              >
+                <text class="action-label">单曲循环</text>
+              </div>
+              <div
+                class="action"
+                @click="setPlayOrder('shuffle')"
+              >
+                <text class="action-label">随机播放</text>
+              </div>
+              <text class="body-text">{{ statusText }}</text>
+            </div>
+
+            <div
+              class="section"
+              if="{{uiScreen === 'lyrics'}}"
+            >
+              <text class="reader-text">{{ uiLyricsText }}</text>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'reader'}}"
+            >
+              <text class="reader-text">{{ uiReaderText }}</text>
+
+              <div
+                class="action"
+                if="{{playing || paused}}"
+                @click="stop"
+              >
+                <text class="action-label">停止播放</text>
+              </div>
+            </div>
+            <div class="scroll-end"></div>
+          </div>
+        </scroll>
+        <div
+          class="scroll-track"
+          if="{{uiScrollVisible}}"
+        >
+          <div
+            class="scroll-fill"
+            style="{{uiScrollStyle}}"
+          ></div>
+        </div>
+      </div>
+      <div
+        class="bottom-cap"
+        @click="uiConnectionDetails"
+      >
+        <text class="bottom-label">{{ uiConnection }}</text>
+      </div>
+    </div>
+    <div
+      class="delete-overlay"
+      if="{{deleteSongId}}"
+    >
+      <div class="delete-dialog">
+        <text class="delete-heading">删除这首歌曲？</text>
+        <scroll
+          class="delete-name-scroll"
+          scroll-y="true"
+        >
+          <text class="delete-name">{{ deleteSongTitle }}</text>
+        </scroll>
+        <scroll
+          class="delete-note-scroll"
+          scroll-y="true"
+        >
+          <text class="delete-note">{{ deleteNote }}</text>
+        </scroll>
+        <div
+          class="dialog-action danger"
+          @click="confirmDeleteSong"
+        >
+          <text class="dialog-action-label">{{ deletingSong ? '正在删除' : '确认删除' }}</text>
+        </div>
+        <div
+          class="dialog-action dialog-cancel"
+          @click="cancelDeleteSong"
+        >
+          <text class="dialog-action-label">取消</text>
+        </div>
+      </div>
+    </div>
+  </stack>
+</template>
+<script>
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright (c) 2026 Leon
+
+import file from '@system.file'
+import app from '@system.app'
+import brightness from '@system.brightness'
+import interconnect from '@system.interconnect'
+import { createMusicReceiver } from '../../common/music.js'
+import { createBridge } from '../../common/bridge.js'
+import { createPlayer } from '../../common/player.js'
+import sample from '../../common/sample.json'
+export default createPlayer(
+  file,
+  app,
+  sample,
+  createBridge,
+  {},
+  { interconnect, createMusicReceiver },
+  brightness
+)
+</script>
+<style>
+.player-root {
+  width: 212px;
+  height: 520px;
+  background-color: #111217;
+}
+.page {
+  width: 212px;
+  height: 520px;
+  padding: 0px 20px;
+  background-color: #111217;
+  flex-direction: column;
+}
+.top-cap {
+  width: 172px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+}
+.top-label {
+  width: 88px;
+  height: 24px;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #c7c6d0;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.scroll-shell {
+  position: relative;
+  width: 172px;
+  height: 424px;
+}
+.content-scroll {
+  width: 172px;
+  height: 424px;
+  flex-direction: column;
+}
+.bottom-cap {
+  width: 172px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-label {
+  width: 100px;
+  height: 22px;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  color: #c7c6d0;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.scroll-content,
+.section {
+  width: 172px;
+  flex-direction: column;
+}
+.section {
+  margin-bottom: 4px;
+}
+.plain-link {
+  width: 172px;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.hint {
+  width: 172px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #c7c6d0;
+  margin-bottom: 6px;
+}
+.page-title {
+  width: 172px;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+.title-shell {
+  width: 172px;
+  height: 42px;
+  margin-bottom: 10px;
+}
+.track-title,
+.title-marquee {
+  width: 172px;
+  height: 40px;
+  font-size: 22px;
+  color: #ffffff;
+}
+.track-title {
+  line-height: 28px;
+  font-weight: bold;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.lyric-marquee {
+  width: 172px;
+  height: 28px;
+  font-size: 17px;
+  color: #bac3ff;
+}
+.progress-rail {
+  width: 172px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: #45464f;
+  margin-bottom: 8px;
+}
+.progress-fill {
+  height: 5px;
+  border-radius: 3px;
+  background-color: #bac3ff;
+}
+.action {
+  width: 172px;
+  height: 56px;
+  padding: 0px 12px;
+  border-radius: 19px;
+  background-color: #242630;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.main-action {
+  height: 90px;
+}
+.home-action {
+  justify-content: center;
+}
+.action-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+.primary {
+  background-color: #293b89;
+}
+.danger {
+  background-color: #8c2930;
+}
+.action-label {
+  width: 112px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: left;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.home-action-label {
+  width: auto;
+  font-size: 28px;
+  font-weight: bold;
+}
+.primary-label {
+  color: #ffffff;
+}
+.body-text {
+  width: 172px;
+  font-size: 17px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.reader-text {
+  width: 172px;
+  font-size: 17px;
+  line-height: 25px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.song-card {
+  width: 172px;
+  padding: 9px;
+  margin-bottom: 10px;
+  border-radius: 18px;
+  background-color: #191a20;
+  flex-direction: column;
+}
+.song-card-title {
+  width: 154px;
+  height: 30px;
+  font-size: 18px;
+  color: #ffffff;
+}
+.song-plain-link {
+  width: 154px;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+.song-hint {
+  width: 154px;
+  font-size: 16px;
+  color: #c7c6d0;
+}
+.song-selected-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+.song-action {
+  width: 154px;
+  height: 56px;
+  padding: 0px 10px;
+  border-radius: 18px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+.song-action-label {
+  width: 100px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: left;
+}
+.transfer-hero-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+.scroll-end {
+  width: 172px;
+  height: 12px;
+}
+.scroll-track {
+  position: absolute;
+  right: 0px;
+  top: 164px;
+  width: 5px;
+  height: 96px;
+  border-radius: 3px;
+  background-color: #4d5669;
+}
+.scroll-fill {
+  position: absolute;
+  left: 0px;
+  width: 5px;
+  border-radius: 3px;
+  background-color: #cdd0e8;
+}
+.record-stage {
+  width: 172px;
+  height: 166px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.record {
+  width: 156px;
+  height: 156px;
+}
+.record-base,
+.record-rim {
+  left: 0px;
+  top: 0px;
+  width: 156px;
+  height: 156px;
+  border-radius: 78px;
+  background-color: #22232e;
+}
+.record-rim {
+  background-color: transparent;
+  border: 2px solid #45464f;
+}
+.record-groove {
+  left: 11px;
+  top: 11px;
+  width: 134px;
+  height: 134px;
+  border-radius: 67px;
+  border: 2px solid #383945;
+}
+.record-inner {
+  left: 24px;
+  top: 24px;
+  width: 108px;
+  height: 108px;
+  border-radius: 54px;
+  border: 2px solid #383945;
+}
+.record-cover {
+  left: 27px;
+  top: 27px;
+  width: 102px;
+  height: 102px;
+  object-fit: cover;
+  transform: rotate(0deg);
+  transform-origin: 51px 51px;
+}
+.record-cover-mask {
+  left: 0px;
+  top: 0px;
+  width: 156px;
+  height: 156px;
+  border-radius: 78px;
+  border: 27px solid #22232e;
+}
+.record-label {
+  left: 47px;
+  top: 47px;
+  width: 62px;
+  height: 62px;
+  border-radius: 31px;
+  background-color: #293b89;
+}
+.record-mark {
+  left: 74px;
+  top: 50px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #bac3ff;
+}
+.record-hole {
+  left: 70px;
+  top: 70px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: #111217;
+}
+.delete-overlay {
+  width: 212px;
+  height: 520px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.72);
+}
+.delete-dialog {
+  width: 172px;
+  height: 308px;
+  padding: 9px;
+  border-radius: 20px;
+  background-color: #25262e;
+  flex-direction: column;
+}
+.delete-heading {
+  width: 154px;
+  height: 30px;
+  font-size: 19px;
+  color: #ffffff;
+}
+.delete-name-scroll {
+  width: 154px;
+  height: 60px;
+  margin-bottom: 6px;
+}
+.delete-name {
+  width: 154px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ffffff;
+}
+.delete-note-scroll {
+  width: 154px;
+  height: 70px;
+  margin-bottom: 6px;
+}
+.delete-note {
+  width: 154px;
+  font-size: 15px;
+  line-height: 21px;
+  color: #c7c6d0;
+}
+.dialog-action {
+  width: 154px;
+  height: 48px;
+  border-radius: 18px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7px;
+}
+.dialog-cancel {
+  background-color: #3b3c46;
+}
+.dialog-action-label {
+  width: 140px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+</style>

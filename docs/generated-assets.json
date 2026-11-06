@@ -1,0 +1,464 @@
+[
+  {
+    "path": "10/rpk/src/common/icons/back.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "f1cd962fc00d49030ad26df9bddb48fbd8fcf15b6695421f1ec31d65f43352d5"
+  },
+  {
+    "path": "10/rpk/src/common/icons/check.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c34062a6bb80c928dd60032f69e84611c4f2c865716f8e132f97136dd03aa265"
+  },
+  {
+    "path": "10/rpk/src/common/icons/connection.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a913f4e8a4e1ed6c310f702e53fec8eb1fd24f28ac31dc9745cdbce1b8626b74"
+  },
+  {
+    "path": "10/rpk/src/common/icons/delete.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a8d21b28eb8dd98e225307cff8a73750b712637f3c1902a1aee1a26d38c34626"
+  },
+  {
+    "path": "10/rpk/src/common/icons/help.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "b133fe3b59bfe01d35bf0e1781ba245ba88ff79d1b764e85dc4cc7813f8b079d"
+  },
+  {
+    "path": "10/rpk/src/common/icons/info.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "699bbe727cfc2efc6eea5002e25c27a027eb7e70662e7288b651b6e3e7a3fea2"
+  },
+  {
+    "path": "10/rpk/src/common/icons/library.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "1bd719c254f435555c246100a1b1dc69c6e402d57439c19ec891aa0921bed72b"
+  },
+  {
+    "path": "10/rpk/src/common/icons/minimize.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c6086e6040317ba3d9bdbeadf9385895e6bd939fe316bd096cf017d212d1638c"
+  },
+  {
+    "path": "10/rpk/src/common/icons/minus.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "e49e6c880977af9250738da04ff2c5fe261a97c639dda2be1a28db88057787e8"
+  },
+  {
+    "path": "10/rpk/src/common/icons/next.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "f2cd077fe3757bed5a439edd9374a2cd606e7d5d8a59a9498c386632f23debf8"
+  },
+  {
+    "path": "10/rpk/src/common/icons/pause.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "599b8ca9b7436641a943c1108eb512929e19453c0b597aeed6334ce498345cf3"
+  },
+  {
+    "path": "10/rpk/src/common/icons/phone.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "8e37f35444f5bc78f6ec059384334925c912b2af556b4bf546762550e6f67f4f"
+  },
+  {
+    "path": "10/rpk/src/common/icons/play.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "12dc5bf5b56c4330ef0fd6aafce405eac06e81c373eed65cbfc5105a568fc8a3"
+  },
+  {
+    "path": "10/rpk/src/common/icons/playback-settings.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "66a14030f15a9984a38d36fa46375245e0133ae944f1e46507795e7aa8c27ded"
+  },
+  {
+    "path": "10/rpk/src/common/icons/plus.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "0ec732dedec6dc9312922ff9faa1e05fde9f08ca924455eb2defae11d8c8b338"
+  },
+  {
+    "path": "10/rpk/src/common/icons/previous-user.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "4d58dd147240c69d7925e6de154b1b9fd351881d67a92e9a8421afdd9281a1ff"
+  },
+  {
+    "path": "10/rpk/src/common/icons/previous.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "4d58dd147240c69d7925e6de154b1b9fd351881d67a92e9a8421afdd9281a1ff"
+  },
+  {
+    "path": "10/rpk/src/common/icons/settings.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "87d6f4a307a3bbf9e5d6c93db4dc1592e6ae392cc066a10317233c67d0bdf116"
+  },
+  {
+    "path": "10/rpk/src/common/icons/song-delete-system.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a8d21b28eb8dd98e225307cff8a73750b712637f3c1902a1aee1a26d38c34626"
+  },
+  {
+    "path": "10/rpk/src/common/icons/stop.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "6ca422549ceede5e49c038035ef0b09706eaba632659d91682dfc913577c15e3"
+  },
+  {
+    "path": "10/rpk/src/common/icons/success.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c34062a6bb80c928dd60032f69e84611c4f2c865716f8e132f97136dd03aa265"
+  },
+  {
+    "path": "10/rpk/src/common/icons/tools.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a913f4e8a4e1ed6c310f702e53fec8eb1fd24f28ac31dc9745cdbce1b8626b74"
+  },
+  {
+    "path": "10/rpk/src/common/icons/vibration.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "2468beb5ae9ccb33698052366fb25c9d133b20cf61d5aad4d581c2e6c609e221"
+  },
+  {
+    "path": "10/rpk/src/common/icons/warning.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "79802ad97ce534b5231940281fee2c06583d473b97ee7ab12a7c3a6fc3d5dad5"
+  },
+  {
+    "path": "10/rpk/src/common/logo.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "d678b09ae434ce5e2ae0d63575f1524aa6be7d725420ca731772712385cef8c2"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/back.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "f1cd962fc00d49030ad26df9bddb48fbd8fcf15b6695421f1ec31d65f43352d5"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/check.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c34062a6bb80c928dd60032f69e84611c4f2c865716f8e132f97136dd03aa265"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/connection.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a913f4e8a4e1ed6c310f702e53fec8eb1fd24f28ac31dc9745cdbce1b8626b74"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/delete.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a8d21b28eb8dd98e225307cff8a73750b712637f3c1902a1aee1a26d38c34626"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/help.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "b133fe3b59bfe01d35bf0e1781ba245ba88ff79d1b764e85dc4cc7813f8b079d"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/info.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "699bbe727cfc2efc6eea5002e25c27a027eb7e70662e7288b651b6e3e7a3fea2"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/library.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "1bd719c254f435555c246100a1b1dc69c6e402d57439c19ec891aa0921bed72b"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/minimize.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c6086e6040317ba3d9bdbeadf9385895e6bd939fe316bd096cf017d212d1638c"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/minus.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "e49e6c880977af9250738da04ff2c5fe261a97c639dda2be1a28db88057787e8"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/next.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "f2cd077fe3757bed5a439edd9374a2cd606e7d5d8a59a9498c386632f23debf8"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/pause.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "599b8ca9b7436641a943c1108eb512929e19453c0b597aeed6334ce498345cf3"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/phone.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "8e37f35444f5bc78f6ec059384334925c912b2af556b4bf546762550e6f67f4f"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/play.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "12dc5bf5b56c4330ef0fd6aafce405eac06e81c373eed65cbfc5105a568fc8a3"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/playback-settings.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "66a14030f15a9984a38d36fa46375245e0133ae944f1e46507795e7aa8c27ded"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/plus.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "0ec732dedec6dc9312922ff9faa1e05fde9f08ca924455eb2defae11d8c8b338"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/previous-user.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "4d58dd147240c69d7925e6de154b1b9fd351881d67a92e9a8421afdd9281a1ff"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/previous.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "4d58dd147240c69d7925e6de154b1b9fd351881d67a92e9a8421afdd9281a1ff"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/settings.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "87d6f4a307a3bbf9e5d6c93db4dc1592e6ae392cc066a10317233c67d0bdf116"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/song-delete-system.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a8d21b28eb8dd98e225307cff8a73750b712637f3c1902a1aee1a26d38c34626"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/stop.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "6ca422549ceede5e49c038035ef0b09706eaba632659d91682dfc913577c15e3"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/success.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c34062a6bb80c928dd60032f69e84611c4f2c865716f8e132f97136dd03aa265"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/tools.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a913f4e8a4e1ed6c310f702e53fec8eb1fd24f28ac31dc9745cdbce1b8626b74"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/vibration.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "2468beb5ae9ccb33698052366fb25c9d133b20cf61d5aad4d581c2e6c609e221"
+  },
+  {
+    "path": "10p/rpk/src/common/icons/warning.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "79802ad97ce534b5231940281fee2c06583d473b97ee7ab12a7c3a6fc3d5dad5"
+  },
+  {
+    "path": "10p/rpk/src/common/logo.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "d678b09ae434ce5e2ae0d63575f1524aa6be7d725420ca731772712385cef8c2"
+  },
+  {
+    "path": "10p/rpk/src/common/vinyl.png",
+    "width": 384,
+    "height": 384,
+    "sha256": "3c8b24ec08e9060bb331ce7b68eacae392110e82e15f00d2dfa13722661b62de"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/back.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "f1cd962fc00d49030ad26df9bddb48fbd8fcf15b6695421f1ec31d65f43352d5"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/check.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c34062a6bb80c928dd60032f69e84611c4f2c865716f8e132f97136dd03aa265"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/connection.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a913f4e8a4e1ed6c310f702e53fec8eb1fd24f28ac31dc9745cdbce1b8626b74"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/delete.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a8d21b28eb8dd98e225307cff8a73750b712637f3c1902a1aee1a26d38c34626"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/help.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "b133fe3b59bfe01d35bf0e1781ba245ba88ff79d1b764e85dc4cc7813f8b079d"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/info.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "699bbe727cfc2efc6eea5002e25c27a027eb7e70662e7288b651b6e3e7a3fea2"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/library.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "1bd719c254f435555c246100a1b1dc69c6e402d57439c19ec891aa0921bed72b"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/minimize.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c6086e6040317ba3d9bdbeadf9385895e6bd939fe316bd096cf017d212d1638c"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/minus.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "e49e6c880977af9250738da04ff2c5fe261a97c639dda2be1a28db88057787e8"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/next.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "f2cd077fe3757bed5a439edd9374a2cd606e7d5d8a59a9498c386632f23debf8"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/pause.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "599b8ca9b7436641a943c1108eb512929e19453c0b597aeed6334ce498345cf3"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/phone.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "8e37f35444f5bc78f6ec059384334925c912b2af556b4bf546762550e6f67f4f"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/play.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "12dc5bf5b56c4330ef0fd6aafce405eac06e81c373eed65cbfc5105a568fc8a3"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/playback-settings.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "66a14030f15a9984a38d36fa46375245e0133ae944f1e46507795e7aa8c27ded"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/plus.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "0ec732dedec6dc9312922ff9faa1e05fde9f08ca924455eb2defae11d8c8b338"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/previous-user.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "4d58dd147240c69d7925e6de154b1b9fd351881d67a92e9a8421afdd9281a1ff"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/previous.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "4d58dd147240c69d7925e6de154b1b9fd351881d67a92e9a8421afdd9281a1ff"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/settings.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "87d6f4a307a3bbf9e5d6c93db4dc1592e6ae392cc066a10317233c67d0bdf116"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/song-delete-system.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a8d21b28eb8dd98e225307cff8a73750b712637f3c1902a1aee1a26d38c34626"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/stop.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "6ca422549ceede5e49c038035ef0b09706eaba632659d91682dfc913577c15e3"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/success.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "c34062a6bb80c928dd60032f69e84611c4f2c865716f8e132f97136dd03aa265"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/tools.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "a913f4e8a4e1ed6c310f702e53fec8eb1fd24f28ac31dc9745cdbce1b8626b74"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/vibration.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "2468beb5ae9ccb33698052366fb25c9d133b20cf61d5aad4d581c2e6c609e221"
+  },
+  {
+    "path": "9p/rpk/src/common/icons/warning.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "79802ad97ce534b5231940281fee2c06583d473b97ee7ab12a7c3a6fc3d5dad5"
+  },
+  {
+    "path": "9p/rpk/src/common/logo.png",
+    "width": 96,
+    "height": 96,
+    "sha256": "d678b09ae434ce5e2ae0d63575f1524aa6be7d725420ca731772712385cef8c2"
+  },
+  {
+    "path": "9p/rpk/src/common/vinyl.png",
+    "width": 384,
+    "height": 384,
+    "sha256": "3c8b24ec08e9060bb331ce7b68eacae392110e82e15f00d2dfa13722661b62de"
+  }
+]

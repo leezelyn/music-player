@@ -1,0 +1,104 @@
+{
+  "description": "机器可读的请求夹具；发送 requests 中单个对象，不发送整个夹具。9 字节只用于协议核对，不是歌曲。",
+  "sample": {
+    "hex": "313233343536373839",
+    "base64": "MTIzNDU2Nzg5",
+    "bytes": 9,
+    "crc32": 3421780262
+  },
+  "requests": {
+    "catalog": {
+      "tag": "haptic.music.v1",
+      "id": "22222222222222222222222222222222",
+      "seq": 0,
+      "op": "catalog",
+      "catalogPageRevision": 1,
+      "catalogOffset": 0
+    },
+    "begin": {
+      "tag": "haptic.music.v1",
+      "id": "11111111111111111111111111111111",
+      "seq": 0,
+      "op": "begin",
+      "title": "协议测试向量",
+      "bytes": 9,
+      "crc32": 3421780262,
+      "rate": 12000,
+      "encoding": "s8",
+      "peak": 64,
+      "resumeRevision": 1,
+      "transport": {
+        "chunkBytes": 256,
+        "intervalMs": 20,
+        "payloadEncoding": "base64"
+      }
+    },
+    "chunk": {
+      "tag": "haptic.music.v1",
+      "id": "11111111111111111111111111111111",
+      "seq": 1,
+      "op": "chunk",
+      "offset": 0,
+      "data_b64": "MTIzNDU2Nzg5",
+      "crc32": 3421780262
+    },
+    "commit": {
+      "tag": "haptic.music.v1",
+      "id": "11111111111111111111111111111111",
+      "seq": 2,
+      "op": "commit"
+    },
+    "receipt": {
+      "tag": "haptic.music.v1",
+      "id": "11111111111111111111111111111111",
+      "seq": 2,
+      "op": "receipt"
+    },
+    "lyrics": {
+      "tag": "haptic.music.v1",
+      "id": "33333333333333333333333333333333",
+      "seq": 0,
+      "op": "lyrics",
+      "songId": "11111111111111111111111111111111",
+      "bytes": 9,
+      "crc32": 3421780262,
+      "lyricsVersion": 0,
+      "lyrics": "[00:00.000]Protocol test"
+    },
+    "cancelSaved": {
+      "tag": "haptic.music.v1",
+      "id": "11111111111111111111111111111111",
+      "seq": 0,
+      "op": "cancel"
+    },
+    "cancelPending": {
+      "tag": "haptic.music.v1",
+      "id": "44444444444444444444444444444444",
+      "seq": 0,
+      "op": "cancel"
+    }
+  },
+  "expected": {
+    "commit": {
+      "tag": "haptic.music.v1",
+      "type": "ack",
+      "id": "11111111111111111111111111111111",
+      "seq": 2,
+      "op": "commit",
+      "ok": true,
+      "next": 9,
+      "saved": true,
+      "receipt": {
+        "revision": 1,
+        "id": "11111111111111111111111111111111",
+        "title": "协议测试向量",
+        "bytes": 9,
+        "crc32": 3421780262,
+        "state": "saved",
+        "verified": true
+      }
+    },
+    "resumeModels": ["10", "10p"],
+    "nonResumeModels": ["9p"]
+  }
+}

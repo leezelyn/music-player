@@ -1,0 +1,1418 @@
+<template>
+  <stack class="player-root">
+    <div
+      class="page"
+      style="{{uiMenuWide ? 'padding:16px 4px;' : ''}}"
+    >
+      <div
+        class="header"
+        style="{{uiMenuWide ? 'margin-left:14px;' : ''}}"
+      >
+        <div
+          class="header-home"
+          if="{{uiScreen === 'home'}}"
+          @click="uiConnectionDetails"
+        >
+          <div
+            class="connection-dot"
+            style="{{uiConnectionStyle}}"
+          ></div>
+          <text class="header-connection">{{ uiConnection }}</text>
+        </div>
+        <div
+          class="back-entry"
+          if="{{uiScreen !== 'home' && uiScreen !== 'disc'}}"
+          @click="uiBack"
+        >
+          <div class="back-button">
+            <image
+              class="back-icon"
+              src="/common/icons/back.png"
+            ></image>
+          </div>
+          <text class="header-title">{{ uiHeader }}</text>
+        </div>
+        <text
+          class="record-header"
+          if="{{uiScreen === 'disc'}}"
+        >
+          {{ uiHeader }}
+        </text>
+        <div
+          class="minimize-button"
+          if="{{uiScreen === 'disc'}}"
+          @click="uiHome"
+        >
+          <image
+            class="minimize-icon"
+            src="/common/icons/minimize.png"
+          ></image>
+        </div>
+        <div
+          class="settings-button"
+          if="{{uiScreen === 'home'}}"
+          @click="uiSettings"
+        >
+          <image
+            class="header-icon"
+            src="/common/icons/settings.png"
+          ></image>
+        </div>
+      </div>
+      <div
+        class="home"
+        if="{{uiScreen === 'home'}}"
+      >
+        <div class="song-heading">
+          <div
+            class="title-shell"
+            @click="uiDisc"
+          >
+            <text
+              class="track-title"
+              if="{{uiTitleUnavailable}}"
+            >
+              {{ uiTrackTitle }}
+            </text>
+            <marquee
+              id="song-marquee"
+              class="title-marquee"
+              if="{{!uiTitleUnavailable}}"
+              direction="left"
+              scrollamount="{{6}}"
+              loop="{{-1}}"
+              text-offset="{{50}}"
+            >
+              {{ uiTrackTitle }}
+            </marquee>
+          </div>
+        </div>
+        <div
+          class="lyric-button"
+          @click="uiLyrics"
+        >
+          <marquee
+            id="lyric-marquee"
+            class="lyric-marquee"
+            if="{{!uiLyricUnavailable}}"
+            direction="left"
+            scrollamount="{{3}}"
+            loop="{{-1}}"
+            text-offset="{{30}}"
+          >
+            {{ uiLyricLine }}
+          </marquee>
+          <text
+            class="lyric-fallback"
+            if="{{uiLyricUnavailable}}"
+          >
+            {{ uiLyricLine }}
+          </text>
+        </div>
+        <div class="timeline">
+          <div class="progress-rail">
+            <div
+              class="progress-fill"
+              style="{{progressStyle}}"
+            ></div>
+          </div>
+          <div class="time-row">
+            <text class="time">{{ elapsedText }}</text>
+            <text class="time time-end">{{ durationText }}</text>
+          </div>
+        </div>
+        <div class="transport">
+          <div
+            class="volume-button"
+            style="{{uiSkipStyle}}"
+            @click="previous"
+          >
+            <image
+              class="previous-icon"
+              src="/common/icons/previous-user.png"
+            ></image>
+          </div>
+          <div
+            class="primary-button"
+            @click="uiPrimary"
+          >
+            <div class="primary-disc">
+              <image
+                class="primary-icon"
+                src="{{uiPrimaryIcon}}"
+              ></image>
+            </div>
+          </div>
+          <div
+            class="volume-button"
+            style="{{uiSkipStyle}}"
+            @click="next"
+          >
+            <image
+              class="next-icon"
+              src="/common/icons/next.png"
+            ></image>
+          </div>
+        </div>
+        <div class="control-caption">
+          <text class="volume-caption">{{ playOrderText }}</text>
+          <text class="primary-caption">{{ uiPrimaryLabel }}</text>
+        </div>
+        <div
+          class="status-button"
+          @click="uiStatusDetails"
+        >
+          <text
+            class="status-summary"
+            style="{{uiStatusStyle}}"
+          >
+            {{ uiStatus }}
+          </text>
+        </div>
+      </div>
+      <div
+        class="navigation"
+        if="{{uiScreen === 'home'}}"
+      >
+        <div
+          class="nav-button"
+          @click="openSongs"
+        >
+          <image
+            class="nav-icon"
+            src="/common/icons/library.png"
+          ></image>
+          <text class="nav-label">歌曲</text>
+        </div>
+        <div
+          class="nav-button"
+          @click="uiTransfer"
+        >
+          <image
+            class="nav-icon"
+            src="/common/icons/phone.png"
+          ></image>
+          <text class="nav-label">传歌</text>
+        </div>
+      </div>
+      <div
+        class="record-page"
+        if="{{uiScreen === 'disc'}}"
+      >
+        <div
+          class="record-title-shell"
+          @click="uiSongDetails"
+        >
+          <text
+            class="record-title"
+            if="{{uiTitleUnavailable}}"
+          >
+            {{ uiTrackTitle }}
+          </text>
+          <marquee
+            id="disc-song-marquee"
+            class="record-title-marquee"
+            if="{{!uiTitleUnavailable}}"
+            direction="left"
+            scrollamount="{{6}}"
+            loop="{{-1}}"
+            text-offset="{{50}}"
+          >
+            {{ uiTrackTitle }}
+          </marquee>
+        </div>
+        <div
+          class="record-stage"
+          @click="uiPrimary"
+        >
+          <image
+            class="record-art"
+            if="{{!uiDiscCoverUri}}"
+            style="{{uiDiscStyle}}"
+            src="/common/vinyl.png"
+          ></image>
+          <image
+            class="record-song-cover"
+            if="{{uiDiscCoverUri}}"
+            style="{{uiDiscStyle}}"
+            src="{{uiDiscCoverUri}}"
+          ></image>
+        </div>
+        <div
+          class="record-lyrics"
+          @click="uiLyrics"
+        >
+          <text class="record-context">{{ uiDiscPrevious }}</text>
+          <text class="record-current">{{ uiDiscCurrent }}</text>
+          <text class="record-context">{{ uiDiscNext }}</text>
+        </div>
+        <div class="record-controls">
+          <text class="record-time">{{ elapsedText }} / {{ durationText }}</text>
+        </div>
+      </div>
+      <div
+        class="scroll-shell"
+        style="{{uiMenuWide ? 'width:328px;' : ''}}"
+        if="{{uiScreen !== 'home' && uiScreen !== 'disc'}}"
+      >
+        <scroll
+          id="content-scroll"
+          class="content-scroll"
+          style="{{uiMenuWide ? 'width:328px;' : ''}}"
+          scroll-y="true"
+          @scroll="onContentScroll"
+          @scrolltop="onContentTop"
+          @scrollbottom="onContentBottom"
+        >
+          <div
+            class="scroll-content"
+            style="{{uiMenuWide ? 'width:328px;' : ''}}"
+          >
+            <div
+              class="section"
+              if="{{uiScreen === 'library'}}"
+            >
+              <text class="section-note">手机歌曲 {{ phoneSongCount }} 首</text>
+              <div
+                class="song-entry"
+                for="{{songs}}"
+                tid="id"
+              >
+                <div
+                  class="song-card"
+                  style="{{$item.cardStyle}}"
+                >
+                  <marquee
+                    id="{{'library-title-' + $item.index}}"
+                    class="song-card-title"
+                    direction="left"
+                    scrollamount="{{6}}"
+                    loop="{{-1}}"
+                    text-offset="{{50}}"
+                    @click="chooseSong($item.index)"
+                  >
+                    {{ $item.displayTitle }}
+                  </marquee>
+                  <div class="song-card-meta">
+                    <text
+                      class="song-card-caption"
+                      @click="chooseSong($item.index)"
+                    >
+                      {{ $item.caption }}
+                    </text>
+                    <image
+                      class="selected-icon"
+                      if="{{$item.selected}}"
+                      src="/common/icons/check.png"
+                      @click="chooseSong($item.index)"
+                    ></image>
+                    <div
+                      class="song-delete"
+                      if="{{$item.deletable}}"
+                      @click="requestDeleteSong($item.id)"
+                    >
+                      <image
+                        class="song-delete-icon"
+                        src="/common/icons/song-delete-system.png"
+                      ></image>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="section"
+                if="{{libraryPageCount > 1}}"
+              >
+                <text class="section-note">第 {{ libraryPageText }} 页</text>
+                <div class="reader-actions">
+                  <div
+                    class="half-button"
+                    if="{{libraryPage > 0}}"
+                    @click="previousLibraryPage"
+                  >
+                    <text class="button-text secondary-text">上一页</text>
+                  </div>
+                  <div
+                    class="half-button"
+                    if="{{libraryPage + 1 < libraryPageCount}}"
+                    @click="nextLibraryPage"
+                  >
+                    <text class="button-text secondary-text">下一页</text>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row-card"
+                @click="uiTransfer"
+              >
+                <text class="row-title">从手机传入歌曲</text>
+                <image
+                  class="row-icon"
+                  src="/common/icons/phone.png"
+                ></image>
+              </div>
+              <text
+                class="body-note"
+                if="{{!hasSelectedSong}}"
+              >
+                暂无歌曲，可从手机传入。
+              </text>
+              <text class="body-status">{{ statusText }}</text>
+              <div
+                class="wide-button"
+                if="{{playing || paused}}"
+                @click="stop"
+              >
+                <text class="button-text">停止播放</text>
+              </div>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'transfer'}}"
+            >
+              <div class="transfer-hero">
+                <div class="transfer-disc">
+                  <image
+                    class="transfer-icon"
+                    src="{{uiTransferIcon}}"
+                  ></image>
+                </div>
+                <text class="transfer-title">{{ uiTransferTitle }}</text>
+                <text class="transfer-progress">{{ uiTransferProgress }}</text>
+              </div>
+              <div
+                class="wide-button secondary"
+                if="{{receiving}}"
+                @click="cancelTransfer"
+              >
+                <text class="button-text secondary-text">中断传输</text>
+              </div>
+              <div
+                class="wide-button"
+                if="{{hasPhoneSong && !receiving}}"
+                @click="choosePhone"
+              >
+                <text class="button-text">选择这首歌曲</text>
+              </div>
+              <div
+                class="wide-button secondary"
+                if="{{playing || paused}}"
+                @click="stop"
+              >
+                <text class="button-text secondary-text">先停止播放</text>
+              </div>
+              <div class="text-card">
+                <text
+                  class="body-text"
+                  if="{{receiving || !phoneReceiptText || uiTransferFailed}}"
+                >
+                  {{ phoneText }}
+                </text>
+                <text
+                  class="body-text"
+                  if="{{phoneReceiptText && !receiving}}"
+                >
+                  {{ phoneReceiptText }}
+                </text>
+              </div>
+              <div
+                class="row-card"
+                @click="openSongs"
+              >
+                <text class="row-title">打开歌曲清单</text>
+                <image
+                  class="row-icon"
+                  src="/common/icons/library.png"
+                ></image>
+              </div>
+            </div>
+            <div
+              class="section menu-section"
+              if="{{uiScreen === 'settings'}}"
+            >
+              <text class="section-note menu-copy">播放与连接</text>
+              <div
+                class="row-card menu-row"
+                @click="uiPlaybackSettings"
+              >
+                <text class="row-title menu-row-title">播放设置</text>
+                <image
+                  class="row-icon"
+                  src="/common/icons/playback-settings.png"
+                ></image>
+              </div>
+              <div
+                class="row-card menu-row"
+                @click="uiReadState"
+              >
+                <text class="row-title menu-row-title">播放状态</text>
+                <image
+                  class="row-icon"
+                  src="/common/icons/info.png"
+                ></image>
+              </div>
+              <div
+                class="row-card menu-row"
+                @click="uiConnectionDetails"
+              >
+                <text class="row-title menu-row-title">连接信息</text>
+                <image
+                  class="row-icon"
+                  src="/common/icons/connection.png"
+                ></image>
+              </div>
+              <div
+                class="row-card menu-row"
+                @click="uiHelp"
+              >
+                <text class="row-title menu-row-title">使用说明</text>
+                <image
+                  class="row-icon"
+                  src="/common/icons/help.png"
+                ></image>
+              </div>
+
+              <!-- prettier-ignore -->
+              <text @click="uiLicense" class="body-note menu-copy">环间音乐 · {{appVersion}}
+{{copyrightText}}
+GPL-3.0-only · 无担保 · 点击查看许可</text>
+              <div
+                class="wide-button secondary menu-row"
+                @click="exitApp"
+              >
+                <text class="button-text secondary-text">退出播放器</text>
+              </div>
+            </div>
+            <div
+              class="section menu-section"
+              if="{{uiScreen === 'playback'}}"
+            >
+              <div
+                class="row-card menu-row"
+                @click="uiToggleAwake"
+              >
+                <div class="awake-copy">
+                  <text class="awake-title">屏幕常亮</text>
+                  <text class="awake-state">{{ uiAwakeText }}</text>
+                </div>
+                <div
+                  class="awake-toggle"
+                  style="{{uiAwakeEnabled ? 'background-color:#bac3ff;justify-content:flex-end;' : ''}}"
+                >
+                  <div class="awake-knob"></div>
+                </div>
+              </div>
+              <text class="section-note menu-copy">音量 {{ volumeText }}</text>
+              <div class="settings-volume-row">
+                <div
+                  class="volume-button"
+                  style="{{uiVolumeStyle}}"
+                  @click="volumeDown"
+                >
+                  <image
+                    class="volume-icon"
+                    src="/common/icons/minus.png"
+                  ></image>
+                </div>
+                <text class="settings-volume-value">{{ volumeText }}</text>
+                <div
+                  class="volume-button"
+                  style="{{uiVolumeStyle}}"
+                  @click="volumeUp"
+                >
+                  <image
+                    class="volume-icon"
+                    src="/common/icons/plus.png"
+                  ></image>
+                </div>
+              </div>
+              <div
+                class="wide-button secondary menu-row"
+                if="{{playing || paused || switching}}"
+                @click="stop"
+              >
+                <text class="button-text secondary-text">停止播放</text>
+              </div>
+              <text class="section-note menu-copy">播放顺序 · {{ playOrderText }}</text>
+              <div
+                class="row-card menu-row"
+                @click="setPlayOrder('sequential')"
+              >
+                <text class="row-title menu-row-title">顺序播放</text>
+                <image
+                  class="row-icon"
+                  if="{{playOrder === 'sequential'}}"
+                  src="/common/icons/check.png"
+                ></image>
+              </div>
+              <div
+                class="row-card menu-row"
+                @click="setPlayOrder('list')"
+              >
+                <text class="row-title menu-row-title">列表循环</text>
+                <image
+                  class="row-icon"
+                  if="{{playOrder === 'list'}}"
+                  src="/common/icons/check.png"
+                ></image>
+              </div>
+              <div
+                class="row-card menu-row"
+                @click="setPlayOrder('single')"
+              >
+                <text class="row-title menu-row-title">单曲循环</text>
+                <image
+                  class="row-icon"
+                  if="{{playOrder === 'single'}}"
+                  src="/common/icons/check.png"
+                ></image>
+              </div>
+              <div
+                class="row-card menu-row"
+                @click="setPlayOrder('shuffle')"
+              >
+                <text class="row-title menu-row-title">随机播放</text>
+                <image
+                  class="row-icon"
+                  if="{{playOrder === 'shuffle'}}"
+                  src="/common/icons/check.png"
+                ></image>
+              </div>
+              <text class="body-status menu-copy">{{ statusText }}</text>
+            </div>
+
+            <div
+              class="section"
+              if="{{uiScreen === 'lyrics'}}"
+            >
+              <text class="reader-text">{{ uiLyricsText }}</text>
+            </div>
+            <div
+              class="section"
+              if="{{uiScreen === 'reader'}}"
+            >
+              <text
+                class="reader-text"
+                style="{{uiReaderKind === 'help' ? 'opacity:0.65;' : ''}}"
+              >
+                {{ uiReaderText }}
+              </text>
+
+              <div
+                class="wide-button secondary"
+                if="{{playing || paused}}"
+                @click="stop"
+              >
+                <text class="button-text secondary-text">停止播放</text>
+              </div>
+            </div>
+            <div class="scroll-end"></div>
+          </div>
+        </scroll>
+        <div
+          class="scroll-track"
+          style="{{uiMenuWide ? 'width:2px;right:-3px;' : ''}}"
+          if="{{uiScrollVisible}}"
+        >
+          <div
+            class="scroll-fill"
+            style="{{uiScrollStyle + (uiMenuWide ? 'width:2px;' : '')}}"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="exit-notice"
+      if="{{uiExitNotice}}"
+    >
+      <text class="exit-notice-text">{{ uiExitNotice }}</text>
+    </div>
+    <div
+      class="delete-overlay"
+      if="{{deleteSongId}}"
+    >
+      <div class="delete-dialog">
+        <text class="delete-heading">删除这首歌曲？</text>
+        <scroll
+          class="delete-name-scroll"
+          scroll-y="true"
+        >
+          <text class="delete-name">{{ deleteSongTitle }}</text>
+        </scroll>
+        <scroll
+          class="delete-note-scroll"
+          scroll-y="true"
+        >
+          <text class="delete-note">{{ deleteNote }}</text>
+        </scroll>
+        <div
+          class="delete-confirm"
+          @click="confirmDeleteSong"
+        >
+          <text class="delete-action-text">{{ deletingSong ? '正在删除' : '确认删除' }}</text>
+        </div>
+        <div
+          class="delete-cancel"
+          @click="cancelDeleteSong"
+        >
+          <text class="delete-action-text">取消</text>
+        </div>
+      </div>
+    </div>
+  </stack>
+</template>
+<script>
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright (c) 2026 Leon
+
+import file from '@system.file'
+import app from '@system.app'
+import brightness from '@system.brightness'
+import interconnect from '@system.interconnect'
+import { createMusicReceiver } from '../../common/music.js'
+import { createBridge } from '../../common/bridge.js'
+import { createPlayer } from '../../common/player.js'
+import sample from '../../common/sample.json'
+export default createPlayer(
+  file,
+  app,
+  sample,
+  createBridge,
+  {},
+  { interconnect, createMusicReceiver },
+  brightness
+)
+</script>
+<style>
+/* Band 9 Pro: 336 design units, 168 horizontal DP. Existing blue/purple semantic palette. */
+.page {
+  width: 336px;
+  height: 480px;
+  padding: 16px 18px;
+  background-color: #111217;
+  flex-direction: column;
+}
+.header {
+  width: 300px;
+  height: 48px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-home {
+  width: 232px;
+  height: 48px;
+  flex-direction: row;
+  align-items: center;
+}
+.connection-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #91919b;
+  margin-right: 10px;
+}
+.header-connection {
+  font-size: 22px;
+  color: #c7c6d0;
+}
+.header-title {
+  width: 240px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  lines: 1;
+}
+.back-button {
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+}
+.back-entry {
+  width: 300px;
+  height: 48px;
+  flex-direction: row;
+  align-items: center;
+}
+.back-icon {
+  width: 32px;
+  height: 42px;
+}
+.settings-button {
+  width: 52px;
+  height: 52px;
+  border-radius: 26px;
+  background-color: #292b50;
+  align-items: center;
+  justify-content: center;
+}
+.header-icon {
+  width: 32px;
+  height: 32px;
+}
+.home {
+  width: 300px;
+  height: 316px;
+  flex-direction: column;
+  margin-top: 4px;
+}
+.song-heading {
+  width: 300px;
+  height: 55px;
+  flex-direction: column;
+  justify-content: center;
+}
+.title-shell {
+  width: 300px;
+  height: 55px;
+  align-items: center;
+}
+.track-title {
+  width: 300px;
+  height: 53px;
+  font-size: 34px;
+  line-height: 38px;
+  font-weight: bold;
+  color: #ffffff;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.title-marquee {
+  width: 300px;
+  height: 53px;
+  font-size: 34px;
+  color: #ffffff;
+}
+.timeline {
+  width: 300px;
+  height: 44px;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+}
+.progress-rail {
+  width: 272px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: #45464f;
+}
+.progress-fill {
+  height: 5px;
+  background-color: #bac3ff;
+  border-radius: 3px;
+}
+.time-row {
+  width: 272px;
+  height: 32px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.time {
+  width: 116px;
+  font-size: 22px;
+  color: #c7c6d0;
+}
+.time-end {
+  text-align: right;
+}
+.transport {
+  width: 300px;
+  height: 104px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.volume-button {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background-color: #191a20;
+  align-items: center;
+  justify-content: center;
+}
+.volume-icon {
+  width: 36px;
+  height: 36px;
+}
+/* Both visible glyphs are 30x34. next.png includes 8px horizontal / 6px vertical transparent padding. */
+.previous-icon {
+  width: 30px;
+  height: 34px;
+  object-fit: contain;
+}
+.next-icon {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+.primary-button {
+  width: 104px;
+  height: 104px;
+  align-items: center;
+  justify-content: center;
+}
+.primary-disc {
+  width: 96px;
+  height: 96px;
+  border-radius: 48px;
+  background-color: #293b89;
+  align-items: center;
+  justify-content: center;
+}
+.primary-icon {
+  width: 50px;
+  height: 50px;
+}
+.control-caption {
+  width: 300px;
+  height: 28px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.volume-caption {
+  width: 190px;
+  font-size: 22px;
+  color: #c7c6d0;
+}
+.primary-caption {
+  width: 110px;
+  font-size: 22px;
+  text-align: right;
+  color: #bac3ff;
+}
+.status-button {
+  width: 300px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+.status-summary {
+  width: 300px;
+  font-size: 22px;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.navigation {
+  width: 300px;
+  height: 64px;
+  margin-top: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.nav-button {
+  width: 144px;
+  height: 64px;
+  border-radius: 24px;
+  background-color: #191a20;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.nav-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+.nav-label {
+  font-size: 24px;
+  color: #ffffff;
+}
+.scroll-shell {
+  width: 300px;
+  height: 364px;
+  margin-top: 12px;
+}
+.content-scroll {
+  width: 300px;
+  height: 364px;
+  flex-direction: column;
+}
+.scroll-content {
+  width: 300px;
+  flex-direction: column;
+}
+.section {
+  width: 288px;
+  flex-direction: column;
+}
+.section-note {
+  width: 288px;
+  font-size: 22px;
+  line-height: 30px;
+  color: #c7c6d0;
+  margin-bottom: 12px;
+}
+.song-card {
+  width: 288px;
+  height: 126px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 24px;
+  flex-direction: column;
+}
+.song-card-title {
+  width: 260px;
+  height: 40px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.song-card-meta {
+  width: 260px;
+  height: 56px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.song-card-caption {
+  width: 168px;
+  font-size: 22px;
+  lines: 1;
+  text-overflow: ellipsis;
+  color: #c7c6d0;
+}
+.selected-icon {
+  width: 32px;
+  height: 32px;
+}
+.row-card {
+  width: 288px;
+  height: 80px;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 24px;
+  background-color: #191a20;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.row-title {
+  width: 214px;
+  font-size: 24px;
+  color: #ffffff;
+}
+.row-icon {
+  width: 44px;
+  height: 44px;
+}
+.body-note {
+  width: 288px;
+  font-size: 22px;
+  line-height: 30px;
+  color: #c7c6d0;
+  margin-bottom: 16px;
+  opacity: 0.65;
+}
+.body-status {
+  width: 288px;
+  font-size: 22px;
+  line-height: 30px;
+  color: #c7c6d0;
+  margin-bottom: 16px;
+}
+.transfer-hero {
+  width: 288px;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0px 20px;
+}
+.transfer-disc {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: #191a20;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.transfer-icon {
+  width: 64px;
+  height: 64px;
+}
+.transfer-title {
+  width: 288px;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 38px;
+  text-align: center;
+  color: #ffffff;
+}
+.transfer-progress {
+  width: 288px;
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  color: #bac3ff;
+  margin-top: 6px;
+}
+.text-card {
+  width: 288px;
+  padding: 16px;
+  border-radius: 24px;
+  background-color: #191a20;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.body-text {
+  width: 256px;
+  font-size: 24px;
+  line-height: 32px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.wide-button {
+  width: 288px;
+  height: 64px;
+  margin-bottom: 12px;
+  border-radius: 24px;
+  background-color: #bac3ff;
+  align-items: center;
+  justify-content: center;
+}
+.button-text {
+  font-size: 24px;
+  color: #10236f;
+}
+.secondary {
+  background-color: #191a20;
+}
+.secondary-text {
+  color: #ffffff;
+}
+.reader-text {
+  width: 288px;
+  font-size: 24px;
+  line-height: 34px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+.reader-actions {
+  width: 288px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.half-button {
+  width: 138px;
+  height: 64px;
+  border-radius: 24px;
+  background-color: #191a20;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-end {
+  width: 288px;
+  height: 20px;
+}
+.scroll-track {
+  position: absolute;
+  right: 0px;
+  top: 108px;
+  width: 5px;
+  height: 96px;
+  border-radius: 3px;
+  background-color: #4d5669;
+}
+.scroll-fill {
+  position: absolute;
+  left: 0px;
+  width: 5px;
+  background-color: #cdd0e8;
+  border-radius: 3px;
+}
+
+.song-entry {
+  width: 300px;
+  flex-direction: column;
+}
+.song-delete {
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  background-color: #d92d35;
+  border-radius: 28px;
+}
+.song-delete-icon {
+  width: 40px;
+  height: 40px;
+}
+.player-root {
+  width: 336px;
+  height: 480px;
+}
+.exit-notice {
+  position: absolute;
+  left: 18px;
+  top: 68px;
+  width: 300px;
+  height: 52px;
+  border-radius: 12px;
+  background-color: #191a20;
+  align-items: center;
+  justify-content: center;
+}
+.exit-notice-text {
+  width: 276px;
+  font-size: 22px;
+  color: #ffc73b;
+  text-align: center;
+}
+.delete-overlay {
+  width: 336px;
+  height: 480px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.72);
+}
+.delete-dialog {
+  width: 300px;
+  height: 386px;
+  padding: 20px;
+  flex-direction: column;
+  border-radius: 28px;
+  background-color: #25262e;
+}
+.delete-heading {
+  width: 260px;
+  height: 40px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.delete-name-scroll {
+  width: 260px;
+  height: 96px;
+  margin-top: 8px;
+}
+.delete-name {
+  width: 260px;
+  font-size: 24px;
+  line-height: 30px;
+  color: #ffffff;
+}
+.delete-note-scroll {
+  width: 260px;
+  height: 64px;
+  flex-direction: column;
+}
+.delete-note {
+  width: 260px;
+  font-size: 22px;
+  color: #c7c6d0;
+}
+.delete-confirm {
+  width: 260px;
+  height: 56px;
+  margin-top: 8px;
+  border-radius: 28px;
+  background-color: #d92d35;
+  align-items: center;
+  justify-content: center;
+}
+.delete-cancel {
+  width: 260px;
+  height: 56px;
+  margin-top: 12px;
+  border-radius: 28px;
+  background-color: #3b3c46;
+  align-items: center;
+  justify-content: center;
+}
+.delete-action-text {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.lyric-button {
+  width: 300px;
+  height: 45px;
+  align-items: center;
+}
+.lyric-marquee {
+  width: 300px;
+  height: 43px;
+  font-size: 24px;
+  color: #bac3ff;
+}
+.lyric-fallback {
+  width: 300px;
+  height: 43px;
+  font-size: 24px;
+  color: #bac3ff;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+/* Menu cards: 336 - 4 - 4 = 328 design pixels. */
+.menu-section {
+  width: 328px;
+}
+.menu-row {
+  width: 328px;
+}
+.menu-row-title {
+  width: 254px;
+}
+.menu-copy {
+  width: 300px;
+  margin-left: 14px;
+}
+
+.record-page {
+  width: 300px;
+  height: 384px;
+  flex-direction: column;
+  align-items: center;
+}
+.record-title-shell {
+  width: 288px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+.record-title {
+  width: 288px;
+  height: 32px;
+  font-size: 24px;
+  lines: 1;
+  text-overflow: ellipsis;
+  color: #ffffff;
+  text-align: center;
+}
+.record-title-marquee {
+  width: 288px;
+  height: 32px;
+  font-size: 24px;
+  color: #ffffff;
+}
+/* The artwork is a bitmap; use the uploaded song cover when present. */
+.record-stage {
+  width: 300px;
+  height: 186px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.record-art {
+  width: 176px;
+  height: 176px;
+  object-fit: contain;
+  transform: rotate(0deg);
+  transform-origin: 88px 88px;
+  flex-shrink: 0;
+}
+/* Keep the existing 122px cover size: its rotated diagonal fits the stage. */
+.record-song-cover {
+  width: 122px;
+  height: 122px;
+  object-fit: contain;
+  transform: rotate(0deg);
+  transform-origin: 61px 61px;
+  flex-shrink: 0;
+}
+.record-lyrics {
+  width: 300px;
+  height: 112px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.record-context {
+  width: 296px;
+  height: 28px;
+  font-size: 22px;
+  color: #91919b;
+  text-align: center;
+  lines: 1;
+  text-overflow: ellipsis;
+}
+.record-current {
+  width: 296px;
+  height: 56px;
+  font-size: 24px;
+  line-height: 28px;
+  color: #bac3ff;
+  text-align: center;
+  lines: 2;
+  text-overflow: ellipsis;
+}
+.record-controls {
+  width: 300px;
+  height: 54px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.record-time {
+  width: 300px;
+  font-size: 22px;
+  text-align: center;
+  color: #c7c6d0;
+}
+.awake-copy {
+  width: 238px;
+  height: 56px;
+  flex-direction: column;
+  justify-content: center;
+}
+.awake-title {
+  width: 238px;
+  height: 30px;
+  font-size: 24px;
+  color: #ffffff;
+}
+.awake-state {
+  width: 238px;
+  height: 26px;
+  font-size: 22px;
+  color: #c7c6d0;
+}
+.awake-toggle {
+  width: 56px;
+  height: 32px;
+  border-radius: 16px;
+  padding: 4px;
+  background-color: #45464f;
+  align-items: center;
+}
+.awake-knob {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+.settings-volume-row {
+  width: 300px;
+  height: 80px;
+  margin-left: 14px;
+  margin-bottom: 12px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.settings-volume-value {
+  width: 144px;
+  font-size: 26px;
+  color: #ffffff;
+  text-align: center;
+}
+.record-header {
+  width: 244px;
+  height: 48px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.minimize-button {
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+}
+.minimize-icon {
+  width: 32px;
+  height: 32px;
+}
+</style>
