@@ -40,4 +40,4 @@ npm run build
 ## 许可
 
 自有代码和生成素材采用 [GPL-3.0-only](LICENSE)，允许商用、修改和再分发；分发覆盖作品须遵守 GPL 的源码提供等义务。
-保留 [NOTICE](NOTICE)；[第三方组件](THIRD_PARTY_NOTICES.md)遵循原许可。硬件研究、私有实现及本地审查材料不在此目录。
+保留 [NOTICE](NOTICE)；[第三方组件](THIRD_PARTY_NOTICES.md)遵循原许可。
